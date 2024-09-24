@@ -1,0 +1,36 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+
+knife4j:
+  gateway:
+    enabled: true
+    # 指定服务发现的模式聚合微服务文档，并且是默认`default`分组
+    strategy: discover
+    discover:
+      enabled: true
+      # 指定版本号(Swagger2|OpenAPI3)
+      version : openapi3
+      # 需要排除的微服务(eg:网关服务)
+      excluded-services:
+        - gateway-service
+
+

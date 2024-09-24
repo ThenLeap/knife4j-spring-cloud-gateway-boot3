@@ -1,0 +1,15 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /order
+spring:
+  application:
+    name: order-service
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
